@@ -26,7 +26,7 @@ local movsetsCorner = Instance.new("UICorner")
 movsetsCorner.CornerRadius = UDim.new(0, 5)
 movsetsCorner.Parent = movsetsButton
 
--- Make the Movsets button draggable
+-- Function to make UI elements draggable
 local function makeDraggable(frame)
     local dragging = false
     local dragInput, mousePos, framePos
@@ -105,26 +105,34 @@ borosButton.BackgroundColor3 = Color3.fromRGB(50, 50, 50)
 borosButton.TextColor3 = Color3.fromRGB(255, 255, 255)
 borosButton.Font = Enum.Font.SourceSans
 borosButton.TextScaled = true
-borosButton.Visible = true
 borosButton.Parent = menuFrame
 
 borosButton.MouseButton1Click:Connect(function()
-    loadstring(game:HttpGet("https://paste.ee/r/XPIH5"))()
+    local success, err = pcall(function()
+        loadstring(game:HttpGet("https://paste.ee/r/XPIH5"))()
+    end)
+    if not success then
+        warn("Failed to load Boros moveset: " .. err)
+    end
 end)
 
 local aTrainButton = Instance.new("TextButton")
-aTrainButton.Text = "A-TRAIN"
+aTrainButton.Text = "A-TRAIN (Hero Hunter)"
 aTrainButton.Size = UDim2.new(0.8, 0, 0.2, 0)
 aTrainButton.Position = UDim2.new(0.1, 0, 0.5, 0)
 aTrainButton.BackgroundColor3 = Color3.fromRGB(50, 50, 50)
 aTrainButton.TextColor3 = Color3.fromRGB(255, 255, 255)
 aTrainButton.Font = Enum.Font.SourceSans
 aTrainButton.TextScaled = true
-aTrainButton.Visible = true
 aTrainButton.Parent = menuFrame
 
 aTrainButton.MouseButton1Click:Connect(function()
-    loadstring(game:HttpGet("https://paste.ee/r/AnZ5j"))()
+    local success, err = pcall(function()
+        loadstring(game:HttpGet("https://paste.ee/r/AnZ5j"))()
+    end)
+    if not success then
+        warn("Failed to load A-TRAIN moveset: " .. err)
+    end
 end)
 
 -- Social Media menu
@@ -194,11 +202,7 @@ local menuOpen = false
 movsetsButton.MouseButton1Click:Connect(function()
     menuOpen = not menuOpen
     menuFrame.Visible = menuOpen
-    if menuOpen then
-        showMovesets() -- Preselect Movesets tab
-    end
 end)
 
--- Make menus draggable
+-- Make the menu draggable
 makeDraggable(menuFrame)
-makeDraggable(socialMediaMenu)
