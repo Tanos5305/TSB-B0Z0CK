@@ -100,7 +100,7 @@ socialMediaTab.Parent = menuFrame
 local borosButton = Instance.new("TextButton")
 borosButton.Text = "Boros (The Strongest Hero)"
 borosButton.Size = UDim2.new(0.8, 0, 0.2, 0)
-borosButton.Position = UDim2.new(0.1, 0, 0.3, 0)
+borosButton.Position = UDim2.new(0.1, 0, 0.25, 0)
 borosButton.BackgroundColor3 = Color3.fromRGB(50, 50, 50)
 borosButton.TextColor3 = Color3.fromRGB(255, 255, 255)
 borosButton.Font = Enum.Font.SourceSans
@@ -112,28 +112,33 @@ borosButton.MouseButton1Click:Connect(function()
     loadstring(game:HttpGet("https://paste.ee/r/XPIH5"))()
 end)
 
+local aTrainButton = Instance.new("TextButton")
+aTrainButton.Text = "A-TRAIN"
+aTrainButton.Size = UDim2.new(0.8, 0, 0.2, 0)
+aTrainButton.Position = UDim2.new(0.1, 0, 0.5, 0)
+aTrainButton.BackgroundColor3 = Color3.fromRGB(50, 50, 50)
+aTrainButton.TextColor3 = Color3.fromRGB(255, 255, 255)
+aTrainButton.Font = Enum.Font.SourceSans
+aTrainButton.TextScaled = true
+aTrainButton.Visible = true
+aTrainButton.Parent = menuFrame
+
+aTrainButton.MouseButton1Click:Connect(function()
+    loadstring(game:HttpGet("https://paste.ee/r/AnZ5j"))()
+end)
+
 -- Social Media menu
 local socialMediaMenu = Instance.new("Frame")
-socialMediaMenu.Name = "SocialMediaMenu"
-socialMediaMenu.Size = UDim2.new(0.3, 0, 0.4, 0)
-socialMediaMenu.Position = UDim2.new(0.35, 0, 0.3, 0)
-socialMediaMenu.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
+socialMediaMenu.Size = UDim2.new(1, 0, 0.9, 0)
+socialMediaMenu.Position = UDim2.new(0, 0, 0.1, 0)
+socialMediaMenu.BackgroundColor3 = Color3.fromRGB(40, 40, 40)
 socialMediaMenu.Visible = false
-socialMediaMenu.Parent = screenGui
-
-local function copyToClipboard(text)
-    setclipboard(text)
-    game.StarterGui:SetCore("SendNotification", {
-        Title = "Link Copied!",
-        Text = "The link was copied to your clipboard.",
-        Duration = 3,
-    })
-end
+socialMediaMenu.Parent = menuFrame
 
 local discordButton = Instance.new("TextButton")
 discordButton.Text = "Discord"
 discordButton.Size = UDim2.new(0.8, 0, 0.2, 0)
-discordButton.Position = UDim2.new(0.1, 0, 0.3, 0)
+discordButton.Position = UDim2.new(0.1, 0, 0.2, 0)
 discordButton.BackgroundColor3 = Color3.fromRGB(50, 50, 50)
 discordButton.TextColor3 = Color3.fromRGB(255, 255, 255)
 discordButton.Font = Enum.Font.SourceSans
@@ -141,13 +146,18 @@ discordButton.TextScaled = true
 discordButton.Parent = socialMediaMenu
 
 discordButton.MouseButton1Click:Connect(function()
-    copyToClipboard("https://discord.gg/GMAuCrhyW3")
+    setclipboard("https://discord.gg/GMAuCrhyW3")
+    game.StarterGui:SetCore("SendNotification", {
+        Title = "Link Copied",
+        Text = "Discord link copied to clipboard",
+        Duration = 3
+    })
 end)
 
 local youtubeButton = Instance.new("TextButton")
 youtubeButton.Text = "YouTube"
 youtubeButton.Size = UDim2.new(0.8, 0, 0.2, 0)
-youtubeButton.Position = UDim2.new(0.1, 0, 0.6, 0)
+youtubeButton.Position = UDim2.new(0.1, 0, 0.5, 0)
 youtubeButton.BackgroundColor3 = Color3.fromRGB(50, 50, 50)
 youtubeButton.TextColor3 = Color3.fromRGB(255, 255, 255)
 youtubeButton.Font = Enum.Font.SourceSans
@@ -155,32 +165,24 @@ youtubeButton.TextScaled = true
 youtubeButton.Parent = socialMediaMenu
 
 youtubeButton.MouseButton1Click:Connect(function()
-    copyToClipboard("https://www.youtube.com/@b0z0_404")
+    setclipboard("https://www.youtube.com/@b0z0_404")
+    game.StarterGui:SetCore("SendNotification", {
+        Title = "Link Copied",
+        Text = "YouTube link copied to clipboard",
+        Duration = 3
+    })
 end)
 
--- Close button for Social Media menu
-local closeButton = Instance.new("TextButton")
-closeButton.Text = "X"
-closeButton.Size = UDim2.new(0.1, 0, 0.1, 0)
-closeButton.Position = UDim2.new(0.9, -10, 0, 10)
-closeButton.BackgroundColor3 = Color3.fromRGB(200, 0, 0)
-closeButton.TextColor3 = Color3.fromRGB(255, 255, 255)
-closeButton.Font = Enum.Font.SourceSansBold
-closeButton.TextScaled = true
-closeButton.Parent = socialMediaMenu
-
-closeButton.MouseButton1Click:Connect(function()
-    socialMediaMenu.Visible = false
-end)
-
--- Tab switching
+-- Tab switching logic
 local function showMovesets()
     borosButton.Visible = true
+    aTrainButton.Visible = true
     socialMediaMenu.Visible = false
 end
 
 local function showSocialMedia()
     borosButton.Visible = false
+    aTrainButton.Visible = false
     socialMediaMenu.Visible = true
 end
 
