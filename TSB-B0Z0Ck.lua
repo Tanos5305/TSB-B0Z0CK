@@ -1,4 +1,3 @@
--- Movsets GUI for B0Z0CK The Strongest Buttlegrounds
 local Players = game:GetService("Players")
 local player = Players.LocalPlayer
 local playerGui = player:WaitForChild("PlayerGui")
@@ -135,6 +134,26 @@ aTrainButton.MouseButton1Click:Connect(function()
     end
 end)
 
+-- Add MINOS PRIME button
+local minosPrimeButton = Instance.new("TextButton")
+minosPrimeButton.Text = "MINOS PRIME (Hero Hunter)"
+minosPrimeButton.Size = UDim2.new(0.8, 0, 0.2, 0)
+minosPrimeButton.Position = UDim2.new(0.1, 0, 0.75, 0)
+minosPrimeButton.BackgroundColor3 = Color3.fromRGB(50, 50, 50)
+minosPrimeButton.TextColor3 = Color3.fromRGB(255, 255, 255)
+minosPrimeButton.Font = Enum.Font.SourceSans
+minosPrimeButton.TextScaled = true
+minosPrimeButton.Parent = menuFrame
+
+minosPrimeButton.MouseButton1Click:Connect(function()
+    local success, err = pcall(function()
+        loadstring(game:HttpGet("https://raw.githubusercontent.com/S1gmaGuy/MinosPrimeFixed/refs/heads/main/ThefixIsSoSigma"))()
+    end)
+    if not success then
+        warn("Failed to load MINOS PRIME moveset: " .. err)
+    end
+end)
+
 -- Social Media menu
 local socialMediaMenu = Instance.new("Frame")
 socialMediaMenu.Size = UDim2.new(1, 0, 0.9, 0)
@@ -173,7 +192,7 @@ youtubeButton.TextScaled = true
 youtubeButton.Parent = socialMediaMenu
 
 youtubeButton.MouseButton1Click:Connect(function()
-    setclipboard("https://www.youtube.com/@b0z0_404")
+    setclipboard("https://www.youtube.com/c/XXInfinityGaming")
     game.StarterGui:SetCore("SendNotification", {
         Title = "Link Copied",
         Text = "YouTube link copied to clipboard",
@@ -181,28 +200,18 @@ youtubeButton.MouseButton1Click:Connect(function()
     })
 end)
 
--- Tab switching logic
-local function showMovesets()
-    borosButton.Visible = true
-    aTrainButton.Visible = true
+-- Tab functionality
+movesetsTab.MouseButton1Click:Connect(function()
+    menuFrame.Visible = true
     socialMediaMenu.Visible = false
-end
-
-local function showSocialMedia()
-    borosButton.Visible = false
-    aTrainButton.Visible = false
-    socialMediaMenu.Visible = true
-end
-
-movesetsTab.MouseButton1Click:Connect(showMovesets)
-socialMediaTab.MouseButton1Click:Connect(showSocialMedia)
-
--- Toggle menu visibility
-local menuOpen = false
-movsetsButton.MouseButton1Click:Connect(function()
-    menuOpen = not menuOpen
-    menuFrame.Visible = menuOpen
 end)
 
--- Make the menu draggable
-makeDraggable(menuFrame)
+socialMediaTab.MouseButton1Click:Connect(function()
+    menuFrame.Visible = false
+    socialMediaMenu.Visible = true
+end)
+
+-- Toggle Movsets button
+movsetsButton.MouseButton1Click:Connect(function()
+    menuFrame.Visible = not menuFrame.Visible
+end)
