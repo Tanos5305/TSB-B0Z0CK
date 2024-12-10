@@ -82,7 +82,7 @@ tabContainer.Parent = menuFrame
 
 local movesetsTab = Instance.new("TextButton")
 movesetsTab.Text = "Movesets"
-movesetsTab.Size = UDim2.new(0.25, -5, 1, -5)
+movesetsTab.Size = UDim2.new(0.2, -5, 1, -5)
 movesetsTab.Position = UDim2.new(0, 5, 0, 5)
 movesetsTab.BackgroundColor3 = Color3.fromRGB(50, 50, 50)
 movesetsTab.TextColor3 = Color3.fromRGB(255, 255, 255)
@@ -92,8 +92,8 @@ movesetsTab.Parent = tabContainer
 
 local socialMediaTab = Instance.new("TextButton")
 socialMediaTab.Text = "Social Media"
-socialMediaTab.Size = UDim2.new(0.25, -5, 1, -5)
-socialMediaTab.Position = UDim2.new(0.25, 5, 0, 5)
+socialMediaTab.Size = UDim2.new(0.2, -5, 1, -5)
+socialMediaTab.Position = UDim2.new(0.2, 5, 0, 5)
 socialMediaTab.BackgroundColor3 = Color3.fromRGB(50, 50, 50)
 socialMediaTab.TextColor3 = Color3.fromRGB(255, 255, 255)
 socialMediaTab.Font = Enum.Font.SourceSansBold
@@ -102,8 +102,8 @@ socialMediaTab.Parent = tabContainer
 
 local settingsTab = Instance.new("TextButton")
 settingsTab.Text = "Settings"
-settingsTab.Size = UDim2.new(0.25, -5, 1, -5)
-settingsTab.Position = UDim2.new(0.5, 5, 0, 5)
+settingsTab.Size = UDim2.new(0.2, -5, 1, -5)
+settingsTab.Position = UDim2.new(0.4, 5, 0, 5)
 settingsTab.BackgroundColor3 = Color3.fromRGB(50, 50, 50)
 settingsTab.TextColor3 = Color3.fromRGB(255, 255, 255)
 settingsTab.Font = Enum.Font.SourceSansBold
@@ -112,13 +112,23 @@ settingsTab.Parent = tabContainer
 
 local helpTab = Instance.new("TextButton")
 helpTab.Text = "Help"
-helpTab.Size = UDim2.new(0.25, -5, 1, -5)
-helpTab.Position = UDim2.new(0.75, 5, 0, 5)
+helpTab.Size = UDim2.new(0.2, -5, 1, -5)
+helpTab.Position = UDim2.new(0.6, 5, 0, 5)
 helpTab.BackgroundColor3 = Color3.fromRGB(50, 50, 50)
 helpTab.TextColor3 = Color3.fromRGB(255, 255, 255)
 helpTab.Font = Enum.Font.SourceSansBold
 helpTab.TextScaled = true
 helpTab.Parent = tabContainer
+
+local tsbToolsTab = Instance.new("TextButton")
+tsbToolsTab.Text = "TSB Tools"
+tsbToolsTab.Size = UDim2.new(0.2, -5, 1, -5)
+tsbToolsTab.Position = UDim2.new(0.8, 5, 0, 5)
+tsbToolsTab.BackgroundColor3 = Color3.fromRGB(50, 50, 50)
+tsbToolsTab.TextColor3 = Color3.fromRGB(255, 255, 255)
+tsbToolsTab.Font = Enum.Font.SourceSansBold
+tsbToolsTab.TextScaled = true
+tsbToolsTab.Parent = tabContainer
 
 -- Apply Hover Effect
 local function applyHoverEffect(button)
@@ -135,8 +145,9 @@ applyHoverEffect(movesetsTab)
 applyHoverEffect(socialMediaTab)
 applyHoverEffect(settingsTab)
 applyHoverEffect(helpTab)
+applyHoverEffect(tsbToolsTab)
 
--- Create a container for the Movsets buttons
+-- Create a container for the Movesets buttons
 local movesetContainer = Instance.new("Frame")
 movesetContainer.Size = UDim2.new(1, 0, 0.75, 0)
 movesetContainer.Position = UDim2.new(0, 0, 0.15, 0)
@@ -169,6 +180,33 @@ end
 createMovesetButton("Boros (The Strongest Hero)", UDim2.new(0.1, 0, 0.1, 0), "https://paste.ee/r/XPIH5")
 createMovesetButton("A-TRAIN (Hero Hunter)", UDim2.new(0.1, 0, 0.3, 0), "https://paste.ee/r/AnZ5j")
 createMovesetButton("MINOS PRIME (Hero Hunter)", UDim2.new(0.1, 0, 0.5, 0), "https://raw.githubusercontent.com/S1gmaGuy/MinosPrimeFixed/refs/heads/main/ThefixIsSoSigma")
+
+-- Create the TSB Tools menu
+local tsbToolsMenu = Instance.new("Frame")
+tsbToolsMenu.Size = UDim2.new(1, 0, 0.75, 0)
+tsbToolsMenu.Position = UDim2.new(0, 0, 0.15, 0)
+tsbToolsMenu.BackgroundColor3 = Color3.fromRGB(50, 50, 50)
+tsbToolsMenu.Visible = false
+tsbToolsMenu.Parent = menuFrame
+
+local teleportButton = Instance.new("TextButton")
+teleportButton.Text = "Teleport to Atomic Slash Location"
+teleportButton.Size = UDim2.new(0.8, 0, 0.2, 0)
+teleportButton.Position = UDim2.new(0.1, 0, 0.1, 0)
+teleportButton.BackgroundColor3 = Color3.fromRGB(50, 50, 50)
+teleportButton.TextColor3 = Color3.fromRGB(255, 255, 255)
+teleportButton.Font = Enum.Font.SourceSans
+teleportButton.TextScaled = true
+teleportButton.Parent = tsbToolsMenu
+
+teleportButton.MouseButton1Click:Connect(function()
+    local success, err = pcall(function()
+        loadstring(game:HttpGet("https://raw.githubusercontent.com/Tanos5305/b0c0-am-chacking/refs/heads/main/script.lua"))()
+    end)
+    if not success then
+        warn("Failed to teleport: " .. err)
+    end
+end)
 
 -- Social Media menu
 local socialMediaMenu = Instance.new("Frame")
@@ -220,14 +258,22 @@ end)
 movesetsTab.MouseButton1Click:Connect(function()
     movesetContainer.Visible = true
     socialMediaMenu.Visible = false
+    tsbToolsMenu.Visible = false -- Hide TSB Tools menu
 end)
 
 socialMediaTab.MouseButton1Click:Connect(function()
     movesetContainer.Visible = false
     socialMediaMenu.Visible = true
+    tsbToolsMenu.Visible = false -- Hide TSB Tools menu
 end)
 
--- Settings Tab functionality with more options
+tsbToolsTab.MouseButton1Click:Connect(function()
+    movesetContainer.Visible = false
+    socialMediaMenu.Visible = false -- Hide social media menu
+    tsbToolsMenu.Visible = true     -- Show TSB Tools menu
+end)
+
+-- Settings Tab functionality
 settingsTab.MouseButton1Click:Connect(function()
     -- Example: Toggle Dark Mode
     local currentColor = menuFrame.BackgroundColor3
@@ -255,3 +301,4 @@ end)
 -- Initially show the Movesets tab
 movesetContainer.Visible = true
 socialMediaMenu.Visible = false
+tsbToolsMenu.Visible = false -- Hide TSB Tools menu initially
