@@ -181,7 +181,7 @@ createMovesetButton("Boros (The Strongest Hero)", UDim2.new(0.1, 0, 0.1, 0), "ht
 createMovesetButton("A-TRAIN (Hero Hunter)", UDim2.new(0.1, 0, 0.3, 0), "https://paste.ee/r/AnZ5j")
 createMovesetButton("MINOS PRIME (Hero Hunter)", UDim2.new(0.1, 0, 0.5, 0), "https://raw.githubusercontent.com/S1gmaGuy/MinosPrimeFixed/refs/heads/main/ThefixIsSoSigma")
 createMovesetButton("Gojo (The Strongest Hero)", UDim2.new(0.1, 0, 0.7, 0), "https://raw.githubusercontent.com/skibiditoiletfan2007/BaldyToSorcerer/refs/heads/main/LatestV2.lua")
-createMovesetButton("Reaper (Metal Bat)", UDim2.new(0.1, 0, 0.9, 0), "https://raw.githubusercontent.com/Reapvitalized/TSB/main/APOPHENIA.lua")
+createMovesetButton("Reaper (Brutal Demon)", UDim2.new(0.1, 0, 0.9, 0), "https://raw.githubusercontent.com/Reapvitalized/TSB/main/APOPHENIA.lua")
 
 
 -- Create the TSB Tools menu
