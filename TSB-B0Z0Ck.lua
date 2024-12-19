@@ -183,7 +183,6 @@ createMovesetButton("MINOS PRIME (Hero Hunter)", UDim2.new(0.1, 0, 0.5, 0), "htt
 createMovesetButton("Gojo (The Strongest Hero)", UDim2.new(0.1, 0, 0.7, 0), "https://raw.githubusercontent.com/skibiditoiletfan2007/BaldyToSorcerer/refs/heads/main/LatestV2.lua")
 createMovesetButton("Reaper (Brutal Demon)", UDim2.new(0.1, 0, 0.9, 0), "https://raw.githubusercontent.com/Reapvitalized/TSB/main/APOPHENIA.lua")
 
-
 -- Create the TSB Tools menu
 local tsbToolsMenu = Instance.new("Frame")
 tsbToolsMenu.Size = UDim2.new(1, 0, 0.75, 0)
@@ -192,6 +191,7 @@ tsbToolsMenu.BackgroundColor3 = Color3.fromRGB(50, 50, 50)
 tsbToolsMenu.Visible = false
 tsbToolsMenu.Parent = menuFrame
 
+-- Teleport Button
 local teleportButton = Instance.new("TextButton")
 teleportButton.Text = "Teleport to Atomic Slash Location"
 teleportButton.Size = UDim2.new(0.8, 0, 0.2, 0)
@@ -209,6 +209,58 @@ teleportButton.MouseButton1Click:Connect(function()
     if not success then
         warn("Failed to teleport: " .. err)
     end
+end)
+
+-- Run Tool Button
+local runToolButton = Instance.new("TextButton")
+runToolButton.Text = "Run Tool"
+runToolButton.Size = UDim2.new(0.8, 0, 0.2, 0)
+runToolButton.Position = UDim2.new(0.1, 0, 0.4, 0)
+runToolButton.BackgroundColor3 = Color3.fromRGB(50, 50, 50)
+runToolButton.TextColor3 = Color3.fromRGB(255, 255, 255)
+runToolButton.Font = Enum.Font.SourceSans
+runToolButton.TextScaled = true
+runToolButton.Parent = tsbToolsMenu
+
+runToolButton.MouseButton1Click:Connect(function()
+    local tool = Instance.new("Tool")
+    tool.Name = "Run Tool"
+    tool.Parent = player.Backpack
+    tool.RequiresHandle = false
+
+    local moving = false
+    local character = player.Character or player.CharacterAdded:Wait()
+    local humanoidRootPart = character:WaitForChild("HumanoidRootPart")
+    local humanoid = character:WaitForChild("Humanoid")
+    local runService = game:GetService("RunService")
+    local movementSpeed = 125
+
+    local animation = Instance.new("Animation")
+    animation.AnimationId = "rbxassetid://18897115785"
+    local animator = humanoid:FindFirstChildOfClass("Animator") or humanoid:WaitForChild("Animator")
+    local animationTrack
+
+    local function moveForward()
+        while moving do
+            local forwardDirection = humanoidRootPart.CFrame.LookVector
+            humanoidRootPart.Velocity = forwardDirection * movementSpeed
+            runService.Stepped:Wait()
+        end
+    end
+
+    tool.Equipped:Connect(function()
+        moving = true
+        animationTrack = animator:LoadAnimation(animation)
+        animationTrack:Play()
+        moveForward()
+    end)
+
+    tool.Unequipped:Connect(function()
+        moving = false
+        if animationTrack then
+            animationTrack:Stop()
+        end
+    end)
 end)
 
 -- Social Media menu
@@ -230,7 +282,7 @@ discordButton.TextScaled = true
 discordButton.Parent = socialMediaMenu
 
 discordButton.MouseButton1Click:Connect(function()
-    setclipboard("https://discord.gg/yourdiscordlink")
+    setclipboard("https://discord.gg/GMAuCrhyW3")
     game.StarterGui:SetCore("SendNotification", {
         Title = "Link Copied",
         Text = "Discord link copied to clipboard",
@@ -249,7 +301,7 @@ youtubeButton.TextScaled = true
 youtubeButton.Parent = socialMediaMenu
 
 youtubeButton.MouseButton1Click:Connect(function()
-    setclipboard("https://youtube.com/channel/UCpAdTw6Vf06pCo6QMEpzvAw")
+    setclipboard("https://www.youtube.com/@b0z0_404")
     game.StarterGui:SetCore("SendNotification", {
         Title = "Link Copied",
         Text = "YouTube link copied to clipboard",
